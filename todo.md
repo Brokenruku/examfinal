@@ -22,6 +22,13 @@ sql
                 insertion des donnes dans membre 
                 fonction insertMembre recuperation par poste dans method des infos
                 upload d image de profile
+        dans les methode passage de l ID du perso vers le prochain page avec les get ID
 
-        
+    headerDedans.php 
+        pour l header dans les pages ex : listeObjet.php
+        avec petit nav est affiche du profile avec image
+    listeObjet.php
+        affichage des donnees de table objet 
+        join avec image respectif
+        avec join de emprunt si y a date de retour si emprunt en cours
 

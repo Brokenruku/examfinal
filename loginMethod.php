@@ -9,8 +9,11 @@ $mdp = $_POST['mdp'];
 
 $ok_login = verfInfo($mysqli, $email,$mdp);
 
+$id_membre = $_POST['id_membre']; 
+
 if ($ok_login = true) {
-    header("Location: x.php?");
+    $id_membre = getIDemail($mysqli, $email,$mdp);
+    header("Location: listeObjet.php?id_membre=" . "$id_membre");
 } else {
     header("Location: login.php?");
 }

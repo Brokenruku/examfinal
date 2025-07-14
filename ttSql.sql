@@ -48,5 +48,13 @@ WHERE email = '$email'
 AND
 mdp = '$mdp';
 
-INSERT INTO membre (nom, date_naissance, genre, email, ville, mdp, image_profil) VALUES
-('$nom', '$date_naissance', '$genre', '$email', '$ville', '$mdp', '$image_profil');
+SELECT o.nom_objet as nomObjet,
+o.nom_categorie as categorie,
+IFNULL(CONCAT(m.nom, ' ', e.last_name), 'pas de ppt') AS membre,
+FROM objet o
+JOIN categorie_objet co ON o.id_categorie = co.id_categorie
+JOIN images_objet imo co ON o.id_objet = imo.id_objet
+LEFT JOIN emprunt e imo co ON o.id_objet = e.id_objet
+LEFT JOIN membre m imo co ON o.id_membre = m.id_membre
+WHERE 
+AND

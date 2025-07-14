@@ -56,7 +56,7 @@ INSERT INTO objet (nom_objet, id_categorie, id_membre) VALUES
 ('Pistolet à colle', 2, 4);
 
 INSERT INTO images_objet (id_objet, nom_image) VALUES
-(1, 'objects/seche-cheveux.jpg'),
+(1, 'objects/1.png'),
 (2, 'objects/pinceau-maquillage.jpg'),
 (3, 'objects/perceuse.jpg'),
 (4, 'objects/scie-circulaire.jpg'),
