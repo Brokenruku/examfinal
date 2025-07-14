@@ -1,4 +1,5 @@
 sql 
+    connexion dans config.php
     table 
         membre (id_membre, nom , date de naissance, genre, émail, ville, mdp, image_profil)
         categorie_objet (id_categorie, nom_categorie )
