@@ -1,12 +1,15 @@
 <?php
+
 define('APP_ROOT', true);
 define('IMG_DEFAUT', 'assets/img/objet/1.png');
+
 require_once 'includes/config.php';
 require_once 'includes/headerDedans.php';
 require_once 'includes/fonction.php';
 
 $id_membre = $_GET['id_membre'];
 $result = afficherObjet($mysqli);
+
 ?>
 
 <a href="ajoutObjet.php?id_membre=<?= $id_membre ?>" class="btn btn-primary">
@@ -67,18 +70,18 @@ $result = afficherObjet($mysqli);
                             ? $row['imagee']
                             : IMG_DEFAUT;
                         ?>
-                        <img src="<?= $imagelien ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
+                        <img src="<?= $imagelien ?>" class="card-img-top" alt="<?=  ($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
 
                         <div class="card-body">
-                            <h5 class="card-title"><?= htmlspecialchars($row['nomObjet']) ?></h5>
+                            <h5 class="card-title"><?=  ($row['nomObjet']) ?></h5>
                             <p class="card-text">
-                                <strong>Catégorie:</strong> <?= htmlspecialchars($row['categorie']) ?><br>
-                                <strong>Propriétaire:</strong> <?= htmlspecialchars($row['proprietaire']) ?><br>
+                                <strong>Catégorie:</strong> <?=  ($row['categorie']) ?><br>
+                                <strong>Propriétaire:</strong> <?=  ($row['proprietaire']) ?><br>
 
                                 <?php if ($row['empruntMembre'] !== 'pas de membreemprunt') { ?>
-                                    <strong>Emprunté par:</strong> Membre #<?= htmlspecialchars($row['empruntMembre']) ?><br>
-                                    <strong>Date emprunt:</strong> <?= htmlspecialchars($row['date_emprunt']) ?><br>
-                                    <strong>Date retour:</strong> <?= ($row['date_retour'] !== 'pas de dater retour' ? htmlspecialchars($row['date_retour']) : 'Non retourné') ?><br>
+                                    <strong>Emprunté par:</strong> Membre #<?=  ($row['empruntMembre']) ?><br>
+                                    <strong>Date emprunt:</strong> <?=  ($row['date_emprunt']) ?><br>
+                                    <strong>Date retour:</strong> <?= ($row['date_retour'] !== 'pas de dater retour' ?  ($row['date_retour']) : 'Non retourné') ?><br>
                                 <?php } else { ?>
                                     <span class="badge bg-success">Disponible</span>
                                 <?php } ?>

@@ -21,18 +21,18 @@ $result = filtrationObject($mysqli, $selectedCategories);
                             ? $row['imagee']
                             : DEFAULT_OBJECT_IMAGE;
                         ?>
-                        <img src="<?= $imagePath ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
+                        <img src="<?= $imagePath ?>" class="card-img-top" alt="<?=  ($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
 
                         <div class="card-body">
-                            <h5 class="card-title"><?= htmlspecialchars($row['nomObjet']) ?></h5>
+                            <h5 class="card-title"><?=  ($row['nomObjet']) ?></h5>
                             <p class="card-text">
-                                <strong>Catégorie:</strong> <?= htmlspecialchars($row['categorie']) ?><br>
-                                <strong>Propriétaire:</strong> <?= htmlspecialchars($row['proprietaire']) ?><br>
+                                <strong>Catégorie:</strong> <?=  ($row['categorie']) ?><br>
+                                <strong>Propriétaire:</strong> <?=  ($row['proprietaire']) ?><br>
 
                                 <?php if ($row['empruntMembre'] !== 'pas de membreemprunt') { ?>
-                                    <strong>Emprunté par:</strong> Membre #<?= htmlspecialchars($row['empruntMembre']) ?><br>
-                                    <strong>Date emprunt:</strong> <?= htmlspecialchars($row['date_emprunt']) ?><br>
-                                    <strong>Date retour:</strong> <?= ($row['date_retour'] !== 'pas de dater retour' ? htmlspecialchars($row['date_retour']) : 'Non retourné') ?><br>
+                                    <strong>Emprunté par:</strong> Membre #<?=  ($row['empruntMembre']) ?><br>
+                                    <strong>Date emprunt:</strong> <?=  ($row['date_emprunt']) ?><br>
+                                    <strong>Date retour:</strong> <?= ($row['date_retour'] !== 'pas de dater retour' ?  ($row['date_retour']) : 'Non retourné') ?><br>
                                 <?php } else { ?>
                                     <span class="badge bg-success">Disponible</span>
                                 <?php } ?>
