@@ -1,62 +1,68 @@
 <?php
-    function verfInfo($mysqli, $email, $mdp){
-        $querry = "SELECT * 
+function verfInfo($mysqli, $email, $mdp)
+{
+    $querry = "SELECT * 
         FROM membre 
         WHERE email = '$email' 
         AND
         mdp = '$mdp'";
 
-        $result = mysqli_query($mysqli, $querry);
-        return $result;
-    }
+    $result = mysqli_query($mysqli, $querry);
+    return $result;
+}
 
-    function insertMembre($mysqli, $nom, $date_naissance, $genre, $email, $ville, $mdp, $image_profil ){
+function insertMembre($mysqli, $nom, $date_naissance, $genre, $email, $ville, $mdp, $image_profil)
+{
 
-        $query = "
+    $query = "
             INSERT INTO membre (nom, date_naissance, genre, email, ville, mdp, image_profil) VALUES
             ('$nom', '$date_naissance', '$genre', '$email', '$ville', '$mdp', '$image_profil')";
 
-        $result = mysqli_query($mysqli, $query);
-        return $result;
-    }
+    $result = mysqli_query($mysqli, $query);
+    return $result;
+}
 
-    function insertObjet($mysqli, $id_membre, $nom_objet, $id_categorie){
-        $query = "
+function insertObjet($mysqli, $id_membre, $nom_objet, $id_categorie)
+{
+    $query = "
             INSERT INTO objet (id_membre, nom_objet, id_categorie) VALUES
             ('$id_membre', '$nom_objet', '$id_categorie')";
 
-        $result = mysqli_query($mysqli, $query);
-        return $result;
-    }
+    $result = mysqli_query($mysqli, $query);
+    return $result;
+}
 
-    function insertImageObjet($mysqli, $id_objet, $nom_image){
-        $query = "
+function insertImageObjet($mysqli, $id_objet, $nom_image)
+{
+    $query = "
             INSERT INTO images_objet (id_objet, nom_image) VALUES
             ('$id_objet', '$nom_image')";
 
-        $result = mysqli_query($mysqli, $query);
-        return $result;
-    }
-    function getIDObjet($mysqli, $id_membre, $nom_objet, $id_categorie) {
-        $query = "SELECT id_objet 
+    $result = mysqli_query($mysqli, $query);
+    return $result;
+}
+function getIDObjet($mysqli, $id_membre, $nom_objet, $id_categorie)
+{
+    $query = "SELECT id_objet 
                 FROM objet 
                 WHERE id_membre = ? 
                 AND nom_objet = ? 
                 AND id_categorie = ? 
                 LIMIT 1";
 
-        $stmt = mysqli_prepare($mysqli, $query);
-        mysqli_stmt_bind_param($stmt, "isi", $id_membre, $nom_objet, $id_categorie);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+    $stmt = mysqli_prepare($mysqli, $query);
+    mysqli_stmt_bind_param($stmt, "isi", $id_membre, $nom_objet, $id_categorie);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-        if ($row = mysqli_fetch_assoc($result)) {
-            return $row['id_objet'];
-        }
-        return false;
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row['id_objet'];
     }
-    function afficherObjet($mysqli) {
-        $query = "SELECT 
+    return false;
+}
+function afficherObjet($mysqli)
+{
+    $query = "SELECT 
                 o.id_objet,
                 o.nom_objet AS nomObjet,
                 co.nom_categorie AS categorie,
@@ -73,13 +79,14 @@
             GROUP BY o.id_objet, o.nom_objet, co.nom_categorie, imo.nom_image, e.id_membre, e.date_emprunt, e.date_retour, m.nom
             ORDER BY o.id_objet ASC";
 
-        $result = mysqli_query($mysqli, $query);
-        return $result;
-    }
+    $result = mysqli_query($mysqli, $query);
+    return $result;
+}
 
-    function afficherFiche($mysqli, $objectId) {
+function afficherFiche($mysqli, $objectId)
+{
 
-        $query = "SELECT 
+    $query = "SELECT 
                 o.nom_objet AS nomObjet,
                 co.nom_categorie AS categorie,
                 imo.nom_image AS imagee,
@@ -99,21 +106,22 @@
             WHERE o.id_objet = '$objectId'
             GROUP BY o.nom_objet, co.nom_categorie, imo.nom_image, e.id_membre, e.date_emprunt, e.date_retour, m.nom
             ORDER BY o.id_objet ASC;";
-    
-        $result = mysqli_query($mysqli, $query);
-    
-        return $result;
+
+    $result = mysqli_query($mysqli, $query);
+
+    return $result;
+}
+
+function filtrationObject($mysqli, $catg)
+{
+
+    $condition = '';
+    if (!empty($catg)) {
+        $catIds = array_map('intval', $catg);
+        $condition = "WHERE co.id_categorie IN (" . implode(',', $catIds) . ")";
     }
 
-    function filtrationObject($mysqli, $catg){
-
-        $condition = '';
-        if (!empty($catg)) {
-            $catIds = array_map('intval', $catg); 
-            $condition = "WHERE co.id_categorie IN (" . implode(',', $catIds) . ")";
-        }
-
-        $query = "SELECT 
+    $query = "SELECT 
                 o.id_objet,
                 o.nom_objet AS nomObjet,
                 co.nom_categorie AS categorie,
@@ -131,34 +139,78 @@
             GROUP BY o.id_objet, o.nom_objet, co.nom_categorie, imo.nom_image, e.id_membre, e.date_emprunt, e.date_retour, m.nom
             ORDER BY o.id_objet ASC";
 
-        return mysqli_query($mysqli, $query);
-    }
-    function getIDemail($mysqli, $email, $mdp){
-        $querry = "SELECT id_membre 
+    return mysqli_query($mysqli, $query);
+}
+function getIDemail($mysqli, $email, $mdp)
+{
+    $querry = "SELECT id_membre 
         FROM membre 
         WHERE email = '$email' 
         AND
         mdp = '$mdp' 
         LIMIT 1";
 
-        $row = mysqli_query($mysqli, $querry);
-        if($row = mysqli_fetch_assoc($row)){
-            return $row['id_membre'];
-        }
+    $row = mysqli_query($mysqli, $querry);
+    if ($row = mysqli_fetch_assoc($row)) {
+        return $row['id_membre'];
+    }
+}
+
+function getCategorie($mysqli)
+{
+    $query = "SELECT * FROM categorie_objet";
+    $categories = [];
+
+    $result = mysqli_query($mysqli, $query);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categories[] = $row['nom_categorie'];
     }
 
-    function getCategorie($mysqli) {
-        $query = "SELECT * FROM categorie_objet";
-        $categories = [];
+    return $categories;
+}
 
-        $result = mysqli_query($mysqli, $query);
+function getMembre($mysqli)
+{
+    $query = "SELECT 
+                    id_membre, 
+                    nom, 
+                    email, 
+                    ville, 
+                    genre, 
+                    date_naissance, 
+                    image_profil 
+                FROM membre 
+                ORDER BY nom ASC";
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            $categories[] = $row['nom_categorie']; 
-        }
+    $result = mysqli_query($mysqli, $query);
+    return $result;
+}
 
-        return $categories;
-    }
+function getMembrePID($mysqli, $id_membre)
+{
+    $query = "SELECT * FROM membre WHERE id_membre = $id_membre";
+    $result = mysqli_query($mysqli, $query);
+    return mysqli_fetch_assoc($result);
+}
 
+function getObjPMembre($mysqli, $id_membre)
+{
+    $query = "SELECT o.id_objet, o.nom_objet, co.nom_categorie AS categorie 
+                FROM objet o
+                JOIN categorie_objet co ON o.id_categorie = co.id_categorie
+                WHERE o.id_membre = $id_membre";
+    return mysqli_query($mysqli, $query);
+}
 
+function getEmpPMembre($mysqli, $id_membre)
+{
+    $query = "SELECT e.id_emprunt, e.date_emprunt, e.date_retour, o.nom_objet, et.id_etat
+            FROM emprunt e
+            JOIN objet o ON e.id_objet = o.id_objet
+            LEFT JOIN etat_objet et ON e.id_emprunt = et.id_emprunt
+            WHERE e.id_membre = $id_membre
+            ORDER BY e.date_emprunt DESC";
+    return mysqli_query($mysqli, $query);
+}
 ?>

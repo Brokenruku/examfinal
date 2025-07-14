@@ -11,6 +11,9 @@ $id_membre = $_GET['id_membre'];
 $result = afficherObjet($mysqli);
 
 ?>
+<a href="listeMembre.php" class="btn btn-primary">
+    list membre
+</a>
 
 <a href="ajoutObjet.php?id_membre=<?= $id_membre ?>" class="btn btn-primary">
     Ajouter un nouvel objet

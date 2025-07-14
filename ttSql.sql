@@ -41,3 +41,11 @@ CREATE TABLE emprunt (
     FOREIGN KEY (id_objet) REFERENCES objet(id_objet),
     FOREIGN KEY (id_membre) REFERENCES membre(id_membre)
 );
+
+CREATE OR REPLACE TABLE etat_objet (
+    id_etat INT AUTO_INCREMENT PRIMARY KEY,
+    id_emprunt INT NOT NULL,
+    etat ENUM('OK', 'Endommagé') NOT NULL,
+    date_retour_effectif DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_emprunt) REFERENCES emprunt(id_emprunt)
+);

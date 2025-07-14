@@ -1,3 +1,7 @@
+*****
+lancement via index.php
+*****
+
 sql 
     connexion dans config.php
     table 
@@ -13,6 +17,7 @@ sql
         10 objets par membre à répartir sur les catégories
         10 emprunts
 
+    
     login.php
         creation de nouveau perso 
         pas nouveau perso 
@@ -50,3 +55,16 @@ sql
         **si y a pas d image on prend un image par defaut   
     supprImagMethode.php
         DELETE l image selection 
+    listeMembre.php
+        pour afficher tout les membre avvec table membre 
+    ficheMembre.php
+        les info de base en relation avec le memebre
+        list de tout les chose qu il a empreint 
+        ajouter un bouton retour pour check si l objet est en bon ou mauvais etat
+            redirection ver retourObjet.php
+            creation d un nouveau table pour stocker ce nv donne
+    retourObjet.php 
+        pour traitrer entre OK ou pas
+    statsObjets.php
+        affiche les nombre des objet OK 
+        affiche les nimbre des objet pas OK
