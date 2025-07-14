@@ -87,6 +87,7 @@ $result = afficherObjet($mysqli);
                             <?php if ($row['empruntMembre'] == 'pas de membreemprunt') { ?>
                                 <a href='emprunterObjet.php?id_objet=<?= $row['id_objet'] ?>&id_membre=<?= $id_membre ?>' class='btn btn-primary'>Emprunter</a>
                             <?php } ?>
+                            <a href='ficheObjet.php?id_objet=<?= $row['id_objet'] ?>&id_membre=<?= $id_membre ?>' class="btn btn-primary">Fiche</a>
                         </div>
                     </div>
                 </div>
