@@ -35,3 +35,10 @@ sql
     filtration.php
         filtrage par categorie 
         verificqtion avec la tablecategorie par rapport auxobjets
+    ajoutObjet.php
+        insertion dans la table objet des parametre
+        insertion dans latable images_objet  l'image selectionner/uploders
+        mettre un bouton supprimer pour supprimer les image
+        **si y a pas d image on prend un image par defaut
+    supprImag.php
+        DELETE l image selection 
