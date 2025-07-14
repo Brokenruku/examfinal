@@ -6,6 +6,8 @@ require_once 'includes/fonction.php';
 
 $result = afficherObjet($mysqli);
 ?>
+
+<a href="ajoutObjet.php?">ajouter un nouveau objet</a>
 <form action="filtration.php" method="post">
     <div class="mb-3">
         <label class="form-label">Filtrer par catégorie :</label><br>

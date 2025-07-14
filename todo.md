@@ -38,6 +38,7 @@ sql
         filtrage par categorie 
         verificqtion avec la tablecategorie par rapport auxobjets
     ajoutObjet.php
+        fonction qui prend l id de l user actuel
         insertion dans la table objet des parametre
         insertion dans latable images_objet  l'image selectionner/uploders
         mettre un bouton supprimer pour supprimer les image
