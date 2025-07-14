@@ -20,6 +20,41 @@
         return $result;
     }
 
+    function insertObjet($mysqli, $id_membre, $nom_objet, $id_categorie){
+        $query = "
+            INSERT INTO objet (id_membre, nom_objet, id_categorie) VALUES
+            ('$id_membre', '$nom_objet', '$id_categorie')";
+
+        $result = mysqli_query($mysqli, $query);
+        return $result;
+    }
+
+    function insertImageObjet($mysqli, $id_objet, $nom_image){
+        $query = "
+            INSERT INTO images_objet (id_objet, nom_image) VALUES
+            ('$id_objet', '$nom_image')";
+
+        $result = mysqli_query($mysqli, $query);
+        return $result;
+    }
+    function getIDObjet($mysqli, $id_membre, $nom_objet, $id_categorie) {
+        $query = "SELECT id_objet 
+                FROM objet 
+                WHERE id_membre = ? 
+                AND nom_objet = ? 
+                AND id_categorie = ? 
+                LIMIT 1";
+
+        $stmt = mysqli_prepare($mysqli, $query);
+        mysqli_stmt_bind_param($stmt, "isi", $id_membre, $nom_objet, $id_categorie);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row['id_objet'];
+        }
+        return false;
+    }
     function afficherObjet($mysqli){
 
         $query = "SELECT 
@@ -84,4 +119,19 @@
             return $row['id_membre'];
         }
     }
+
+    function getCategorie($mysqli) {
+        $query = "SELECT * FROM categorie_objet";
+        $categories = [];
+
+        $result = mysqli_query($mysqli, $query);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $categories[] = $row['nom_categorie']; 
+        }
+
+        return $categories;
+    }
+
+
 ?>
