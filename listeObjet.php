@@ -9,7 +9,10 @@ var_dump($_GET['id_membre']);
 $result = afficherObjet($mysqli);
 ?>
 
-<a href="ajoutObjet.php?id_membre=<?= $id_membre ?>">ajouter un nouveau objet</a>
+<a href="ajoutObjet.php?id_membre=<?= $id_membre ?>" class="btn btn-primary">
+    Ajouter un nouvel objet
+</a>
+
 <form action="filtration.php" method="post">
     <div class="mb-3">
         <label class="form-label">Filtrer par catégorie :</label><br>
