@@ -1,11 +1,11 @@
 <?php
 define('APP_ROOT', true);
+define('DEFAULT_OBJECT_IMAGE', 'assets/img/objet/1.png');
 require_once 'includes/config.php';
 require_once 'includes/headerDedans.php';
 require_once 'includes/fonction.php';
 
 $id_membre = $_GET['id_membre'];
-var_dump($_GET['id_membre']);
 $result = afficherObjet($mysqli);
 ?>
 
@@ -36,19 +36,19 @@ $result = afficherObjet($mysqli);
         <br>
 
         <label class="form-label">Filtrer avec deroulant :</label>
-        <select name="catg[]" class="form-select" >
+        <select name="catg[]" class="form-select">
             <?php
             $categories = mysqli_query($mysqli, "SELECT * FROM categorie_objet ORDER BY nom_categorie");
             while ($cat = mysqli_fetch_assoc($categories)) {
             ?>
-                <option value="<?php echo ($cat['id_categorie']); ?>">
-                    <?php echo ($cat['nom_categorie']); ?>
+                <option value="<?php echo $cat['id_categorie']; ?>">
+                    <?php echo $cat['nom_categorie']; ?>
                 </option>
             <?php
             }
             ?>
         </select>
-        
+
     </div>
     <button type="submit" class="btn btn-primary">Filtrer</button>
 </form>
@@ -62,13 +62,12 @@ $result = afficherObjet($mysqli);
             <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <?php if (!empty($row['imagee'])) { ?>
-                            <a href="ficheObjet.php?id_objet=<?= $id_objet ?>"><img src="<?= htmlspecialchars($row['imagee']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;"></a>
-                        <?php } else { ?>
-                            <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
-                                Pas d'image
-                            </div>
-                        <?php } ?>
+                        <?php
+                        $imagePath = !empty($row['imagee']) && file_exists($_SERVER['DOCUMENT_ROOT'] . $row['imagee'])
+                            ? $row['imagee']
+                            : DEFAULT_OBJECT_IMAGE;
+                        ?>
+                        <img src="<?= $imagePath ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
 
                         <div class="card-body">
                             <h5 class="card-title"><?= htmlspecialchars($row['nomObjet']) ?></h5>
