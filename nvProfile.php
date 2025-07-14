@@ -5,49 +5,55 @@ require_once 'includes/header.php';
 require_once 'includes/fonction.php';
 ?>
 
-<form action="nvProfileMethod.php" method="post" enctype="multipart/form-data">
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Créer un nouveau profil</h3>
 
-    <label for="nom"> nom : </label>
-    <input type="text" name="nom" required>
+    <form action="nvProfileMethod.php" method="post" enctype="multipart/form-data" class="border p-4 rounded shadow-sm bg-light">
 
-    <br>
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom :</label>
+            <input type="text" class="form-control" name="nom" required>
+        </div>
 
-    <label for="date_naissance">Date d'anniv :</label>
-    <input type="date" id="date" name="date_naissance" required>
+        <div class="mb-3">
+            <label for="date_naissance" class="form-label">Date d'anniversaire :</label>
+            <input type="date" class="form-control" name="date_naissance" required>
+        </div>
 
-    <br>
+        <div class="mb-3">
+            <label for="genre" class="form-label">Genre :</label>
+            <select name="genre" class="form-select">
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+                <option value="Autre">Autre</option>
+            </select>
+        </div>
 
-    <select name="genre">
-        <option value="Homme">Homme</option>
-        <option value="Femme">Femme</option>
-        <option value="Autre">Autre</option>
-    </select>
-    
-    <br>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email :</label>
+            <input type="text" class="form-control" name="email" required>
+        </div>
 
-    <label for="email"> email : </label>
-    <input type="text" name="email" required>
+        <div class="mb-3">
+            <label for="ville" class="form-label">Ville :</label>
+            <input type="text" class="form-control" name="ville" required>
+        </div>
 
-    <br>
+        <div class="mb-3">
+            <label for="mdp" class="form-label">Mot de passe :</label>
+            <input type="password" class="form-control" name="mdp" required>
+        </div>
 
-    <label for="ville"> ville : </label>
-    <input type="text" name="ville" required>
+        <div class="mb-3">
+            <label for="image_profil" class="form-label">Image de profil :</label>
+            <input type="file" class="form-control" name="image_profil" accept="image/*" required>
+        </div>
 
-    <br>
-
-    <label for="mdp">Mot de passe :</label>
-    <input type="password" name="mdp" required>
-
-    <br>
-
-    <legend>mettre une image</legend>
-    <label for="image_profil">Choisir une image :</label>
-    <input type="file" name="image_profil" accept="image/*" required>
-    
-    <br>
-
-    <input type="submit" value="enregistrer" name="submit">
-</form>
+        <div class="d-grid">
+            <input type="submit" value="Enregistrer" name="submit" class="btn btn-success">
+        </div>
+    </form>
+</div>
 
 <?php
 include 'includes/footer.php';
