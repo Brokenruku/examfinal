@@ -7,11 +7,16 @@ require_once 'includes/fonction.php';
 ?>
 
 <form action="loginMethod.php" method="post">
-    <label for="nom"> nom : </label>
-    <input type="text" name="nom" required>
+    <label for="email"> email : </label>
+    <input type="text" name="email" required>
+
+    <br>
 
     <label for="mdp"> mdp : </label>
     <input type="text" name="mdp" required>
+
+    <br>   
+    <input type="submit" value="iviyv">
 </form>
 
 <br>

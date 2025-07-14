@@ -5,7 +5,7 @@ require_once 'includes/header.php';
 require_once 'includes/fonction.php';
 ?>
 
-<form action="nvProfileMethod.php" method="post">
+<form action="nvProfileMethod.php" method="post" enctype="multipart/form-data">
 
     <label for="nom"> nom : </label>
     <input type="text" name="nom" required>
@@ -42,11 +42,11 @@ require_once 'includes/fonction.php';
 
     <legend>mettre une image</legend>
     <label for="image_profil">Choisir une image :</label>
-    <input type="file" name="image_profil" accept="assets/image/*" required>
+    <input type="file" name="image_profil" accept="image/*" required>
     
     <br>
 
-    <input type="submit" value="enregistrer">
+    <input type="submit" value="enregistrer" name="submit">
 </form>
 
 <?php

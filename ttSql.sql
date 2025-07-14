@@ -46,4 +46,7 @@ SELECT *
 FROM membre 
 WHERE email = '$email' 
 AND
-mdp = 'mdp'
+mdp = '$mdp';
+
+INSERT INTO membre (nom, date_naissance, genre, email, ville, mdp, image_profil) VALUES
+('$nom', '$date_naissance', '$genre', '$email', '$ville', '$mdp', '$image_profil');

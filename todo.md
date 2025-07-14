@@ -17,9 +17,11 @@ sql
         pas nouveau perso 
             verifiation email + mdp dans le loginMethod.php par le table membre
             fonction verfInfo poir verifier email+mdp
-        nouveau perso
-            insertion des donnes dans membre 
-            upload d image de profile
+        nvProfile.php
+            nouveau perso
+                insertion des donnes dans membre 
+                fonction insertMembre recuperation par poste dans method des infos
+                upload d image de profile
 
         
 
