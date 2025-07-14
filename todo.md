@@ -31,4 +31,6 @@ sql
         affichage des donnees de table objet 
         join avec image respectif
         avec join de emprunt si y a date de retour si emprunt en cours
-
+    filtration.php
+        filtrage par categorie 
+        verificqtion avec la tablecategorie par rapport auxobjets

@@ -4,28 +4,9 @@ require_once 'includes/config.php';
 require_once 'includes/headerDedans.php';
 require_once 'includes/fonction.php';
 
-$result = afficherObjet($mysqli);
+$selectedCategories = isset($_POST['catg']) ? $_POST['catg'] : [];
+$result = filtrationObject($mysqli, $selectedCategories);
 ?>
-<form action="filtration.php" method="post">
-    <div class="mb-3">
-        <label class="form-label">Filtrer par catégorie :</label><br>
-
-        <?php
-        $categories = mysqli_query($mysqli, "SELECT * FROM categorie_objet ORDER BY nom_categorie");
-
-        while ($cat = mysqli_fetch_assoc($categories)) {
-        ?>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="catg[]" id="cat-<?php echo $cat['id_categorie']; ?>" value="<?php echo $cat['id_categorie']; ?>">
-                <label class="form-check-label" for="cat-<?php echo $cat['id_categorie']; ?>"><?php echo $cat['nom_categorie']; ?></label>
-            </div>
-        <?php
-        }
-        ?>
-
-    </div>
-    <button type="submit" class="btn btn-primary">Filtrer</button>
-</form>
 
 <div class="container">
     <h2>Liste des objets disponibles</h2>
