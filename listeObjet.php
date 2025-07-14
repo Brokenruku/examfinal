@@ -1,6 +1,6 @@
 <?php
 define('APP_ROOT', true);
-define('DEFAULT_OBJECT_IMAGE', 'assets/img/objet/1.png');
+define('IMG_DEFAUT', 'assets/img/objet/1.png');
 require_once 'includes/config.php';
 require_once 'includes/headerDedans.php';
 require_once 'includes/fonction.php';
@@ -63,11 +63,11 @@ $result = afficherObjet($mysqli);
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <?php
-                        $imagePath = !empty($row['imagee']) && file_exists($_SERVER['DOCUMENT_ROOT'] . $row['imagee'])
+                        $imagelien = !empty($row['imagee']) && file_exists($_SERVER['DOCUMENT_ROOT'] . $row['imagee'])
                             ? $row['imagee']
-                            : DEFAULT_OBJECT_IMAGE;
+                            : IMG_DEFAUT;
                         ?>
-                        <img src="<?= $imagePath ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
+                        <img src="<?= $imagelien ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
 
                         <div class="card-body">
                             <h5 class="card-title"><?= htmlspecialchars($row['nomObjet']) ?></h5>
@@ -84,9 +84,7 @@ $result = afficherObjet($mysqli);
                                 <?php } ?>
                             </p>
 
-                            <?php if ($row['empruntMembre'] == 'pas de membreemprunt') { ?>
-                                <a href='emprunterObjet.php?id_objet=<?= $row['id_objet'] ?>&id_membre=<?= $id_membre ?>' class='btn btn-primary'>Emprunter</a>
-                            <?php } ?>
+                            <a href='emprunterObjet.php?id_objet=<?= $row['id_objet'] ?>&id_membre=<?= $id_membre ?>' class='btn btn-primary'>Emprunter</a>
                             <a href='ficheObjet.php?id_objet=<?= $row['id_objet'] ?>&id_membre=<?= $id_membre ?>' class="btn btn-primary">Fiche</a>
                         </div>
                     </div>

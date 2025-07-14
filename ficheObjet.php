@@ -1,5 +1,6 @@
 <?php
 define('APP_ROOT', true);
+define('IMG_DEFAUT', 'assets/img/objet/1.png');
 
 require_once 'includes/config.php';
 include 'includes/header.php';
@@ -10,13 +11,13 @@ $result = afficherFiche($mysqli, $objectId);
 $row = mysqli_fetch_assoc($result);
 
 ?>
-<?php if (!empty($row['imagee'])) { ?>
-    <a href="ficheObjet.php?id_objet=<?= $objectId ?>"><img src="<?= htmlspecialchars($row['imagee']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;"></a>
-<?php } else { ?>
-    <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
-        Pas d'image
-    </div>
-<?php } ?>
+<?php
+$imagelien = !empty($row['imagee']) && file_exists($_SERVER['DOCUMENT_ROOT'] . $row['imagee'])
+    ? $row['imagee']
+    : IMG_DEFAUT;
+?>
+<img src="<?= $imagelien ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
+
 <div class="card-body">
     <h5 class="card-title"><?= htmlspecialchars($row['nomObjet']) ?></h5>
     <p class="card-text">
