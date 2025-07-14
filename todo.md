@@ -32,7 +32,11 @@ sql
         affichage des donnees de table objet 
         join avec image respectif
         avec join de emprunt si y a date de retour si emprunt en cours
-        un checkbox qui va ver filtration pour les categorie selectionner
+        recherche 
+            un checkbox qui va ver filtration pour les categorie selectionner
+            un input de recherche avec le nom de l objet 
+            un liste deroulant qui charge les categorie (une seul value de retout)
+        
         mettre un petit lien qui accede a la formulaire de nouveau objetajoutObjet.php
     filtration.php
         filtrage par categorie 
