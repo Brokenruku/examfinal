@@ -4,10 +4,12 @@ require_once 'includes/config.php';
 require_once 'includes/headerDedans.php';
 require_once 'includes/fonction.php';
 
+$id_membre = $_GET['id_membre'];
+var_dump($_GET['id_membre']);
 $result = afficherObjet($mysqli);
 ?>
 
-<a href="ajoutObjet.php?">ajouter un nouveau objet</a>
+<a href="ajoutObjet.php?id_membre=<?= $id_membre ?>">ajouter un nouveau objet</a>
 <form action="filtration.php" method="post">
     <div class="mb-3">
         <label class="form-label">Filtrer par catégorie :</label><br>

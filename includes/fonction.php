@@ -76,12 +76,12 @@
         FROM membre 
         WHERE email = '$email' 
         AND
-        mdp = '$mdp'";
+        mdp = '$mdp' 
+        LIMIT 1";
 
         $row = mysqli_query($mysqli, $querry);
         if($row = mysqli_fetch_assoc($row)){
-            $result = $row['id_membre'];
+            return $row['id_membre'];
         }
-        return $result;
     }
 ?>
