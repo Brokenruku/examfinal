@@ -13,9 +13,12 @@ $result = afficherObjet($mysqli);
     Ajouter un nouvel objet
 </a>
 
+<h2>recherche</h2>
 <form action="filtration.php" method="post">
     <div class="mb-3">
-        <label class="form-label">Filtrer par catégorie :</label><br>
+        <label class="form-label">Filtrer par catégorie :</label>
+
+        <br>
 
         <?php
         $categories = mysqli_query($mysqli, "SELECT * FROM categorie_objet ORDER BY nom_categorie");
@@ -30,9 +33,27 @@ $result = afficherObjet($mysqli);
         }
         ?>
 
+        <br>
+
+        <label class="form-label">Filtrer avec deroulant :</label>
+        <select name="catg[]" class="form-select" >
+            <?php
+            $categories = mysqli_query($mysqli, "SELECT * FROM categorie_objet ORDER BY nom_categorie");
+            while ($cat = mysqli_fetch_assoc($categories)) {
+            ?>
+                <option value="<?php echo ($cat['id_categorie']); ?>">
+                    <?php echo ($cat['nom_categorie']); ?>
+                </option>
+            <?php
+            }
+            ?>
+        </select>
+        
     </div>
     <button type="submit" class="btn btn-primary">Filtrer</button>
 </form>
+
+<br>
 
 <div class="container">
     <h2>Liste des objets disponibles</h2>
@@ -48,13 +69,13 @@ $result = afficherObjet($mysqli);
                                 Pas d'image
                             </div>
                         <?php } ?>
-                        
+
                         <div class="card-body">
                             <h5 class="card-title"><?= htmlspecialchars($row['nomObjet']) ?></h5>
                             <p class="card-text">
                                 <strong>Catégorie:</strong> <?= htmlspecialchars($row['categorie']) ?><br>
                                 <strong>Propriétaire:</strong> <?= htmlspecialchars($row['proprietaire']) ?><br>
-                                
+
                                 <?php if ($row['empruntMembre'] !== 'pas de membreemprunt') { ?>
                                     <strong>Emprunté par:</strong> Membre #<?= htmlspecialchars($row['empruntMembre']) ?><br>
                                     <strong>Date emprunt:</strong> <?= htmlspecialchars($row['date_emprunt']) ?><br>
@@ -63,8 +84,8 @@ $result = afficherObjet($mysqli);
                                     <span class="badge bg-success">Disponible</span>
                                 <?php } ?>
                             </p>
-                            
-                            <?php if ($row['empruntMembre'] == 'pas de membreemprunt')  {?>
+
+                            <?php if ($row['empruntMembre'] == 'pas de membreemprunt') { ?>
                                 <a href='emprunterObjet.php?id_objet=<?= $id_objet ?>' class='btn btn-primary'>Emprunter</a>
                             <?php } ?>
                         </div>
