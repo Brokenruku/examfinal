@@ -8,7 +8,7 @@ $date_naissance = $_POST['date_naissance'];
 $genre = $_POST['genre'];
 $email = $_POST['email'];
 $ville = $_POST['ville'];
-$mdp = $_POST['mdp']; 
+$mdp = $_POST['mdp'];
 
 $uploadDir = 'assets/img/profiles/';
 
@@ -25,11 +25,12 @@ if (move_uploaded_file($_FILES['image_profil']['tmp_name'], $uploadFile)) {
     $ok_nvProfil = insertMembre($mysqli, $nom, $date_naissance, $genre, $email, $ville, $mdp, $image_profil);
 
     if ($ok_nvProfil) {
-        header("Location: profil.php");
+        $id_membre = getIDemail($mysqli, $email, $mdp);
+        header("Location: listeObjet.php?id_membre=" . "$id_membre");
     } else {
-        header("Location: nvProfile.php");
+        header("Location: login.php");
     }
 } else {
-    header("Location: nvProfile.php");
+    header("Location: login.php");
 }
 ?>
