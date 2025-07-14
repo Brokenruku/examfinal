@@ -32,6 +32,8 @@ sql
         affichage des donnees de table objet 
         join avec image respectif
         avec join de emprunt si y a date de retour si emprunt en cours
+        un checkbox qui va ver filtration pour les categorie selectionner
+        mettre un petit lien qui accede a la formulaire de nouveau objetajoutObjet.php
     filtration.php
         filtrage par categorie 
         verificqtion avec la tablecategorie par rapport auxobjets
@@ -40,5 +42,5 @@ sql
         insertion dans latable images_objet  l'image selectionner/uploders
         mettre un bouton supprimer pour supprimer les image
         **si y a pas d image on prend un image par defaut   
-    supprImagMethoe.php
+    supprImagMethode.php
         DELETE l image selection 
