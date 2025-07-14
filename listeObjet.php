@@ -42,7 +42,7 @@ $result = afficherObjet($mysqli);
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <?php if (!empty($row['imagee'])) { ?>
-                            <img src="<?= htmlspecialchars($row['imagee']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;">
+                            <a href="ficheObjet.php?id_objet=<?= $id_objet ?>"><img src="<?= htmlspecialchars($row['imagee']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nomObjet']) ?>" style="height: 200px; object-fit: cover;"></a>
                         <?php } else { ?>
                             <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
                                 Pas d'image

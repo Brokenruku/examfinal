@@ -78,6 +78,34 @@
         return $result;
     }
 
+    function afficherFiche($mysqli, $objectId) {
+
+        $query = "SELECT 
+                o.nom_objet AS nomObjet,
+                co.nom_categorie AS categorie,
+                imo.nom_image AS imagee,
+                IFNULL(CONCAT(e.id_membre), 'pas de membre emprunt') AS empruntMembre,
+                IFNULL(CONCAT(e.date_emprunt), 'pas de date emprunt') AS date_emprunt,
+                IFNULL(CONCAT(e.date_retour), 'pas de date retour') AS date_retour,
+                IFNULL(CONCAT(m.nom), 'pas de ppt') AS proprietaire,
+                GROUP_CONCAT(DISTINCT imo2.nom_image) AS autres_images,
+                GROUP_CONCAT(DISTINCT CONCAT(e2.date_emprunt, ' - ', e2.id_membre)) AS historique_emprunts
+            FROM objet o
+            JOIN categorie_objet co ON o.id_categorie = co.id_categorie
+            JOIN images_objet imo ON o.id_objet = imo.id_objet
+            LEFT JOIN emprunt e ON o.id_objet = e.id_objet
+            LEFT JOIN membre m ON o.id_membre = m.id_membre
+            LEFT JOIN images_objet imo2 ON o.id_objet = imo2.id_objet AND imo2.nom_image != imo.nom_image
+            LEFT JOIN emprunt e2 ON o.id_objet = e2.id_objet
+            WHERE o.id_objet = '$objectId'
+            GROUP BY o.nom_objet, co.nom_categorie, imo.nom_image, e.id_membre, e.date_emprunt, e.date_retour, m.nom
+            ORDER BY o.id_objet ASC;";
+    
+        $result = mysqli_query($mysqli, $query);
+    
+        return $result;
+    }
+
     function filtrationObject($mysqli, $catg){
 
         $condition = '';
